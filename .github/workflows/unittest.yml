@@ -2,12 +2,27 @@ name: Unittests
 
 on:
   push:
+    tags: ['v*']
     branches: ["main"]
   pull_request:
     branches: ["main"]
     types: [opened, reopened]
 
 jobs:
+  build:
+    name: 🚀 Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: 🚀 Install dependencies
+        run: |
+          sudo apt install python3-pip
+          pip3 install pytest
+          pip install doxygen
   run:
     name: 🚀 Run
     runs-on: ubuntu-latest
