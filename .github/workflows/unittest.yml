@@ -1,0 +1,27 @@
+name: Unittests
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+    types: [opened, reopened]
+
+jobs:
+  run:
+    name: 🚀 Run
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'  # Specify the Python version you want to use
+
+      - name: 🚀 Run script
+        run: |
+          pytest test_tree.py::TestTree
